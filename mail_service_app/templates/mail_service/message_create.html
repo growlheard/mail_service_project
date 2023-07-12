@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+        <h1>Добавить клиента</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.title|as_crispy_field }}
+            {{ form.content|as_crispy_field }}
+            <button class="btn btn-outline-secondary" type="submit">Создать</button>
+             <a href="{% url 'mail_service:message_list' %}" class="btn btn-info btn-sm">Назад</a>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,79 @@
+.btn-dark {
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+.btn-outline-light {
+    color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.btn-outline-light:hover {
+    color: #343a40;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.list-group-item-dark {
+    background-color: #222222;
+    color: #ffffff;
+}
+.custom-link {
+  margin-top: 1cm;
+}
+/* Set the border and text color for table cells */
+.table td, .table th {
+    border: 1px solid #dee2e6;
+    color: #fff;
+}
+
+/* Change the background and text color for table headers */
+.table thead th {
+    background-color: #343a40;
+    color: #fff;
+}
+
+/* Change the background and text color for delete and edit buttons */
+.btn-danger, .btn-warning {
+    background-color: #343a40;
+    color: #fff;
+}
+
+/* Set the same padding and margin for delete and edit buttons */
+.btn-danger, .btn-warning {
+    padding: 0.375rem 0.75rem;
+    margin-right: 0.5rem;
+}
+
+/* Change the background color for modal dialogs */
+.modal-content {
+    background-color: #343a40;
+}
+
+/* Change the text color for modal headers and buttons */
+.modal-header, .modal-footer {
+    color: #fff;
+}
+.page-container {
+    padding-top: 5cm;
+}
+
+.page-border {
+    margin-top: 5cm;
+    border: 1px solid black;
+    padding: 1cm;
+}
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 30px auto;
+    width: 80%;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid black;
+}
+.my-card {
+  background-color: #dcdcdc;
+}

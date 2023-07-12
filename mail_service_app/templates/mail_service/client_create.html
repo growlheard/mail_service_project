@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} <title>Создание пользователя</title>{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container">
+    <h1>Добавить клиента</h1>
+    <form method="post">
+      {% csrf_token %}
+      {% crispy form %}
+         <a href="{% url 'mail_service:client_list' %}" class="btn btn-info btn-sm">Назад</a>
+    </form>
+  </div>
+{% endblock %}

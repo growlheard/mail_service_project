@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %} <title>Просмотр статьи</title>{% endblock %}
+{% load mediapath %}
+
+{% block content %}
+    <style>
+        .object td {
+            color: white;
+        }
+
+        .mailing-list th {
+            color: white;
+        }
+
+        .modal-content {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+
+        .btn {
+            width: 100px;
+        }
+
+        .btn-lg {
+            width: 20px;
+        }
+    </style>
+    <div class="container">
+        <div class="card text-center bg-dark text-white">
+            <div class="card-header">
+                <h1 class="card-title mb-0">{{ object.title }}</h1>
+                <div class="card-footer">
+                    <img src="{% mediapath object.preview %}" alt="{{ object.title }}" width="500" height="300">
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="lead">{{ object.content }}</p>
+                <h4 class="card-title">Количество просмотров: {{ object.views_count }} </h4>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'blog:blog_update' object.slug %}" class="btn btn-info btn-sm">Изменить</a>
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#deleteModal">Удалить</button>
+                {% endif %}
+                <a href="{% url 'blog:blog_list' %}" class="btn btn-info btn-sm">Назад</a>
+            </div>
+            <div class="card-footer">
+                <small>{{ object.created_at | date }}</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Удалить запись</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите удалить эту запись?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px;">Отмена</button>
+                    <form action="{% url 'blog:blog_delete' object.slug %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{% url 'blog:blog_list' %}">
+                        <button type="submit" class="btn btn-danger" style="width: 100px;">Удалить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %} <title>Менеджер рассылок</title>{% endblock %}
+{% block header_title %}
+{% endblock %}
+{% block header_links %}
+     {% if user.is_authenticated %}
+    <a class="nav-link active" aria-current="page" href="{% url 'mail_service:mailing_list' %}">Мои рассылки</a>
+    <a class="nav-link active" href="{% url 'mail_service:mailing_create' %}">Создать рассылку</a>
+    <a class="nav-link active" href="#">Профиль</a>
+     {% else %}
+         <a class="nav-link active" href="{% url 'users:register' %}">Регистрация</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+   <div class="container-h text-center my-5 py-5">
+        <div class="row">
+            <div class="col-md-10 mx-auto">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header card-header-custom">
+                        <h0 class="mt-3 mb-3">Менеджер рассылок - это онлайн-платформа, позволяющая создавать и отправлять электронные письма большому количеству адресатов с возможностью настройки параметров отправки и получения статистики по доставке и открытию писем.</h0>
+                    </div>
+                    <div class="card-body text-muted">
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Всего рассылок : {{ mailing_count }}</li>
+                            <li>Активные рассылки: {{ active_mailing_count }}</li>
+                            <li>Количество клиентов : {{ count_clients }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <a href="{% url 'mail_service:mailing_create' %}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Создать рассылку</a>
+  </p>
+     <h1>Статьи</h1>
+
+<div class="container">
+    <div class="row">
+        {% for object in blog_posts %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-150">
+                    <h3 class="card-header card-header-custom"><a href="{% url 'blog:blog_detail' object.slug %}" style="color: white; margin: 0;">{{ object.title }}</a></h3>
+                    <div class="card-body card-body-custom">
+                        <h5 class="card-title">{{ object.content | truncatechars:100 }}</h5>
+                        <img src="" class="card-img-top mx-auto d-block img-fluid" alt="">
+                        <ul class="d-flex flex-column justify-content-between">
+                            <li><a class="card-text-white">Просмотры: {{ object.views_count }}</a></li>
+                            <li><p class="card-text mb-0">Дата публикации: {{ object.created_at }}</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}
+{% block extra_css %}
+    {{ block.super }}
+    <style>
+        body {
+            background-color: #343a40;
+        }
+        .card-header-custom {
+            background-color: #51585e;
+            color: #fff;
+        }
+        .card-body-custom {
+            background-color: #dde0e3;
+            color: #000000;
+        }
+    </style>
+{% endblock %}

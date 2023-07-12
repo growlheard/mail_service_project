@@ -1,0 +1,15 @@
+{% extends 'mail_service/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Регистрация</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <div class="form-group text-center">
+        <button class="btn btn-outline-secondary" type="submit">Регистрация</button>
+         <a href="{% url 'mail_service:mailing_list' %}" class="btn btn-outline-secondary">Назад</a>
+        <a href="{% url 'users:password_reset' %}" class="btn btn-outline-secondary">Забыли пароль?</a>
+    </div>
+</form>
+{% endblock %}

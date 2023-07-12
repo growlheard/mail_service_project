@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <style>
+        .mailing-list td {
+            color: white;
+        }
+
+        .mailing-list th {
+            color: white;
+        }
+
+        .modal-content {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+
+        .btn {
+            width: 100px;
+        }
+
+        .btn-lg {
+            width: 20px;
+        }
+    </style>
+    <div class="container my-5 py-3">
+        <h1 class="text-center">{{ title }}</h1>
+        <div class='table-responsive mt-5'>
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th class="text-center text-white">ID</th>
+                    <th class="text-center text-white">Тема письма</th>
+                    <th class="text-center text-white">Содержание</th>
+                    <th class="text-center text-white">Пользователь</th>
+                    <th scope="col" style="text-align: center; width: 20%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for message in message_list %}
+                    <tr>
+                        <td class="text-center text-white">{{ message.id }}</td>
+                        <td class="text-center text-white">{{ message.title }}</td>
+                        <td class="text-center text-white">{{ message.content }}</td>
+                        <td class="text-center text-white">{{ message.user }}</td>
+                        <td class="text-center">
+                            {% if user.is_authenticated %}
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMessageModal{{ message.id }}">Удалить</button>
+                                <a href="{% url 'mail_service:message_update' message.id %}"
+                                   class="btn btn-warning btn-sm">Изменить</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% if user.is_authenticated %}
+                        <div class="modal fade" id="deleteMessageModal{{ message.id }}" tabindex="-1"
+                             aria-labelledby="deleteMessageModal{{ message.id }}Label" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-dark modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteMessageModal{{ message.id }}Label">Удаление сообщения</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Вы действительно хотите удалить сообщение "{{ message.title }}"?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method="post" action="{% url 'mail_service:message_delete' message.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">Удалить</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center text-white">Нет доступных сообщений</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

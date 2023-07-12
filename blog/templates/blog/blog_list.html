@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %} <title>Список статей</title>{% endblock %}
+{% block content %}
+{% load mediapath %}
+<div class="container">
+    <h1 class="text-center">Список записей</h1>
+    <table class="table table-striped table-dark">
+        <thead>
+        <tr>
+            <th scope="col" style="text-align: center;">ID</th>
+            <th scope="col" style="text-align: center;">Заголовок</th>
+            <th scope="col" style="text-align: center;">Содержание</th>
+            <th scope="col" style="text-align: center;">Превью</th>
+            <th scope="col" style="text-align: center;">Просмотры</th>
+            <th scope="col" style="text-align: center;">Статус публикации</th>
+            <th scope="col" style="text-align: center;"></th>
+        </tr>
+        </thead>
+        <tbody class="table-group-divider table-divider-primary">
+        {% for object in object_list %}
+        <tr>
+            <th scope="row">{{ object.pk }}</th>
+            <td>{{ object.title }}</td>
+            <td>{{ object.content|truncatechars:100 }}</td>
+            <td>
+
+            </td>
+            <td style="text-align: center">{{ object.views_count }}</td>
+            <td style="text-align: center">
+                <a href="{% url 'blog:blog_change_status' pk=object.pk %}" class="btn btn-warning btn-sm btn-block {% if object.is_published %}active{% endif %}">
+                    {% if object.is_published %}
+                        Снять с публикации
+                    {% else %}
+                        Опубликовать
+                    {% endif %}
+                </a>
+            </td>
+            <td>
+                <a href="{{ object.get_absolute_url }}" class="btn btn-info btn-sm btn-block">Перейти </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="container" style="text-align: center">
+        <a href="{% url 'blog:blog_create' %}" class="btn btn-outline-secondary btn-sm my-3"
+           style="border-radius: 25px; padding: 10px 25px; font-size: 20px; font-weight: bold;">
+            Создать запись
+        </a>
+    </div>
+</div>
+
+<style>
+    th {
+        color: white;
+    }
+    .btn-warning.active {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+    .btn-warning.active:hover, .btn-warning.active:focus, .btn-warning.active:active {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+    .btn-warning:not(.active):hover, .btn-warning:not(.active):focus, .btn-warning:not(.active):not(:disabled):active:hover, .btn-warning:not(.active):not(:disabled):active:focus {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+</style>
+
+{% endblock %}

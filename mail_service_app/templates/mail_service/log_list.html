@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load mediapath %}
+    <div class="container">
+        <h1 class="text-center">История рассылок</h1>
+        <table class="table table-striped table-dark">
+            <thead>
+            <tr>
+                <th scope="col" style="text-align: center;">ID</th>
+                <th scope="col" style="text-align: center;">Название</th>
+                <th scope="col" style="text-align: center;">Статус</th>
+                <th scope="col" style="text-align: center;">Время</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider table-divider-primary">
+            {% for object in object_list %}
+                <tr>
+                <th scope="row">{{ object.pk }}</th>
+                <td>{{ object.mailing.title }}</td>
+                 <td>{{ object.status }}</td>
+                 <td>{{ object.sent_at }}</td>
+                <td class="text-center">
+                </td>
+            {% endfor %}
+            </tbody>
+        </table>
+        </table>
+    </div>
+
+    <style>
+        th {
+            color: white;
+        }
+    </style>
+
+{% endblock %}

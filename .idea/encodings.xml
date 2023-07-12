@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/blog/forms.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/blog/models.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mail_service_app/forms.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mail_service_app/models.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mail_service_app/templates/mail_service/client_create.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mail_service_app/templates/mail_service/client_list.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mail_service_app/views.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mailing_log.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/requirements.txt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/users/forms.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/users/management/commands/tasks.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/users/models.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/users/templates/users/email_reset_message.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/users/views.py" charset="UTF-8" />
+  </component>
+</project>
