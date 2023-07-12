@@ -39,15 +39,16 @@ DB_USER=
 DB_PASSWORD=
 DB_PORT=
 ```
-## Выполните `migrate`
+## Выполните миграции
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
-## **После этого можно запустить сервер командой : **
+## **После этого можно запустить сервер командой :**
 ```bash
 python manage.py runserver
 ```
-## **Для запуска периодичных рассылок используйте команду: **
+## **Для запуска периодичных рассылок используйте команду:**
 ```bash
 python manage.py services
 ```
